@@ -1,31 +1,29 @@
+// https://eslint.org/docs/user-guide/configuring
+
 module.exports = {
   root: true,
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
   env: {
-    node: true,
+    browser: true,
   },
   extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/typescript/recommended",
-    "@vue/prettier",
-    "@vue/prettier/@typescript-eslint",
+    // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
+    // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
+    'plugin:vue/essential', 
+    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
+    'standard'
   ],
-  parserOptions: {
-    ecmaVersion: 2020,
-  },
+  // required to lint *.vue files
+  plugins: [
+    'vue','js'
+  ],
+  // add your custom rules here
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
-  },
-  overrides: [
-    {
-      files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)",
-      ],
-      env: {
-        mocha: true,
-      },
-    },
-  ],
-};
+    // allow async-await
+    'generator-star-spacing': 'off',
+    // allow debugger during development
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+  }
+}
